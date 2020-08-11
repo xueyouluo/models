@@ -15,7 +15,7 @@
 """Gaussian error linear unit."""
 
 import tensorflow as tf
-
+import math
 
 @tf.keras.utils.register_keras_serializable(package='Text')
 def gelu(x):
@@ -29,4 +29,6 @@ def gelu(x):
   Returns:
     `x` with the GELU activation applied.
   """
-  return tf.keras.activations.gelu(x, approximate=True)
+  cdf = 0.5 * (1.0 + tf.tanh(
+      (math.sqrt(2 / math.pi) * (x + 0.044715 * tf.pow(x, 3)))))
+  return x * cdf

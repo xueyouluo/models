@@ -13,7 +13,7 @@
 # limitations under the License.
 # ==============================================================================
 """Gaussian error linear unit."""
-
+import math
 import tensorflow as tf
 
 
@@ -29,4 +29,7 @@ def gelu(x):
   Returns:
     `x` with the GELU activation applied.
   """
-  return tf.keras.activations.gelu(x, approximate=True)
+  cdf = 0.5 * (1.0 + tf.tanh(
+      (math.sqrt(2 / math.pi) * (x + 0.044715 * tf.pow(x, 3)))))
+  return x * cdf
+  #return tf.keras.activations.gelu(x, approximate=True)

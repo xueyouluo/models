@@ -437,11 +437,11 @@ class QqpProcessor(DataProcessor):
     for i, line in enumerate(lines):
       if i == 0:
         continue
-      guid = "%s-%s" % (set_type, line[0])
+      guid = "%s-%s" % (set_type, i)
       try:
-        text_a = line[3]
-        text_b = line[4]
-        label = line[5]
+        text_a = line[0]
+        text_b = line[1]
+        label = line[2]
       except IndexError:
         continue
       examples.append(
